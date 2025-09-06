@@ -14,7 +14,7 @@ enum ClienteTipo {
 
 enum UsuarioRol {
   admin
-  vendedor
+  user
 }
 
 model Fabricante {
@@ -67,7 +67,7 @@ model Colocacion {
 model Cliente {
   id        BigInt      @id @default(autoincrement())
   nombre    String      @db.VarChar(150)
-  telefono  String?     @unique @db.VarChar(30)
+  telefono  String      @unique @db.VarChar(30)
   tipo      ClienteTipo @default(regular)
   createdAt DateTime    @default(now())
 
@@ -95,8 +95,8 @@ model Empleado {
   apellidos  String   @db.VarChar(120)
   cedula     String   @unique @db.VarChar(40)
   tipoSangre String?  @db.VarChar(5)
-  telefono   String?  @db.VarChar(30)
-  email      String?  @unique @db.VarChar(120)
+  telefono   String   @db.VarChar(30)
+  email      String   @unique @db.VarChar(120)
   createdAt  DateTime @default(now())
 
   usuario Usuario?
@@ -106,7 +106,7 @@ model Usuario {
   id           BigInt     @id @default(autoincrement())
   username     String     @unique @db.VarChar(60)
   passwordHash String     @db.VarChar(255)
-  rol          UsuarioRol @default(vendedor)
+  rol          UsuarioRol @default(user)
   empleadoId   BigInt?    @unique
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
